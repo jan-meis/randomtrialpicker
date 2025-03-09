@@ -1,0 +1,13 @@
+OS: openSUSE Leap 15.x
+Dependencies:
+- nginx
+- postgresql17-server
+- python
+- php
+- php-fpm
+- php8-pgsql
+- php8-dom
+- php8-tokenizer
+- php-xmlwriter
+
+The first version of this project had a MariaDB database, then I migrated to postgresql. Thus, all the python scripts are outdated.
