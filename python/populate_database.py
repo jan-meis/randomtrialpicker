@@ -4,7 +4,7 @@ import gzip
 import shutil
 from pathlib import Path
 import xml.etree.ElementTree as ET
-import mariadb
+import psycopg2
 import sys
 import re
 import gc
@@ -12,15 +12,14 @@ import secrets
 
 # Connect to MariaDB Platform
 try:
-    conn = mariadb.connect(
-        user=user,
-        password=password,
-        host=host,
-        port=port,
-        database=database
+    conn = psycopg2.connect(
+        user=secrets.user,
+        password=secrets.password,
+        host=secrets.host,
+        database=secrets.database
     )
-except mariadb.Error as e:
-    print(f"Error connecting to MariaDB Platform: {e}")
+except psycopg2.Error as e:
+    print(f"Error connecting to PostgreSQL Platform: {e}")
     sys.exit(1)
 # Get Cursor
 cur = conn.cursor()

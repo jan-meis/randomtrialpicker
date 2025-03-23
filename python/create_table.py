@@ -3,7 +3,7 @@ import gzip
 import shutil
 from pathlib import Path
 import xml.etree.ElementTree as ET
-import mariadb
+import psycopg2
 import sys
 import gc
 import time
@@ -95,7 +95,7 @@ def create_table(filename: str, cur):
         JournalIssue_Issue VARCHAR(42),\
         JournalIssue_PubDate_Year VARCHAR(12)\
         );")
-    except mariadb.Error as e: 
+    except psycopg2.Error as e: 
         print(f"Error: {e}")
 
     for idx in range(len(pmids)):
@@ -111,7 +111,7 @@ def create_table(filename: str, cur):
                         journal_volumes[idx],
                         journal_issues[idx],
                         pubyears[idx]))
-        except mariadb.Error as e: 
+        except psycopg2.Error as e: 
             print(f"Error: {e}")
 
     print("first table OK")
@@ -125,7 +125,7 @@ def create_table(filename: str, cur):
         Text TEXT,\
         index (PMID)\
         );")
-    except mariadb.Error as e: 
+    except psycopg2.Error as e: 
         print(f"Error: {e}")
     
     print("before second table")
@@ -137,7 +137,7 @@ def create_table(filename: str, cur):
                         (abstracts[0][idx],
                         abstracts[1][idx],
                         abstracts[2][idx]))
-        except mariadb.Error as e: 
+        except psycopg2.Error as e: 
             print(f"Error: {e}")
     
     print("second table OK")

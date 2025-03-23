@@ -2,7 +2,7 @@ from requests_oauthlib import OAuth1Session
 import os
 import json
 import subprocess
-import mariadb
+import psycopg2
 import sys
 import secrets
 
@@ -11,15 +11,14 @@ pmid = int(proc.stdout.read())
 
 # Connect to MariaDB Platform
 try:
-    conn = mariadb.connect(
-        user=user,
-        password=password,
-        host=host,
-        port=port,
-        database=database
+    conn = psycopg2.connect(
+        user=secrets.user,
+        password=secrets.password,
+        host=secrets.host,
+        database=secrets.database
     )
-except mariadb.Error as e:
-    print(f"Error connecting to MariaDB Platform: {e}")
+except psycopg2.Error as e:
+    print(f"Error connecting to PostgreSQL Platform: {e}")
     sys.exit(1)
 # Get Cursor
 cur = conn.cursor()
@@ -34,10 +33,10 @@ payload = {"text":  f"Today's random trial: '{title}' randomtrialpicker.org/tria
 
 # Make the request
 oauth = OAuth1Session(
-    consumer_key,
-    client_secret=consumer_secret,
-    resource_owner_key=resource_owner_key,
-    resource_owner_secret=resource_owner_secret
+    secrets.consumer_key,
+    client_secret=secrets.consumer_secret,
+    resource_owner_key=secrets.resource_owner_key,
+    resource_owner_secret=secrets.resource_owner_secret
 )
 
 # Making the request
