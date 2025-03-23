@@ -54,13 +54,12 @@
             echo $doi . "<br><br>";
             echo "<h2> Abstract </h2>";
             foreach ($rows_abstract as $abstract) {
-                
-                if (str_starts_with(strtoupper($abstract["label"]), "TRIAL REGI")) {
+                if (str_starts_with(strtoupper($abstract["label"]), "TRIAL REGI") &&
                     preg_match(
                         "@NCT[0-9]+@",
                         $abstract["text"],
                         $NCT_num,
-                    );
+                    )) {
                     $newtext = preg_replace(
                         "@NCT[0-9]+@",
                         "<a href='https://clinicaltrials.gov/study/" . $NCT_num[0] . "'>" . $NCT_num[0] . "</a>",
