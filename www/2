@@ -1,0 +1,13 @@
+async function get_random_trial() {
+    const url = await fetch('get_random_trial_id.php')
+                      .then(response=>response.text())
+                      .then(data=>"trial?PMID="+data)
+                      .catch(err=>console.log(err));
+    return url;
+}
+const next_trial_promise = get_random_trial();
+const next_trial_url = "https://randomtrialpicker.org/" + next_trial_promise;
+fetch(next_trial_url);
+async function return_random_trial() {
+    next_trial_promise.then(data=>{window.location.assign(data)})
+}

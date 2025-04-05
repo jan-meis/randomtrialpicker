@@ -3,5 +3,5 @@
 </header>
 
 <body>
-<script>get_random_trial();</script>
+<script>return_random_trial();</script>
 </body>

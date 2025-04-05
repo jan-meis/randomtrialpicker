@@ -2,9 +2,6 @@
 <html>
 <head>
 <link rel="stylesheet" href="style.css">
-<script src="get_random_trial.js"></script>
-<script>
-</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -12,7 +9,7 @@
 
 <div class = "container">
     <br>
-    <input class = "button" type="button" id="get_random_trial_button" value="New random trial" onclick="get_random_trial();" />
+    <input class = "button" type="button" id="get_random_trial_button" value="New random trial" onclick="return_random_trial();" />
     <br><br><br>
 
     <?php
@@ -84,6 +81,8 @@
 </div>
 
 </body>
+<script src="get_random_trial.js"></script>
+
 </html>
 
 
